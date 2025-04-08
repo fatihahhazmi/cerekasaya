@@ -1,6 +1,6 @@
 
-name = "ao3-clone"
+name = "cerekasaya"
 type = "javascript"
-account_id = "YOUR_CLOUDFLARE_ID"
+account_id = "XdVtSbG9VugdLkwoyOY6gqBSmd0Aev84l0UARiQ3"
 workers_dev = true
 compatibility_date = "2024-04-01"
