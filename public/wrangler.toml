@@ -1,0 +1,6 @@
+
+name = "ao3-clone"
+type = "javascript"
+account_id = "YOUR_CLOUDFLARE_ID"
+workers_dev = true
+compatibility_date = "2024-04-01"
