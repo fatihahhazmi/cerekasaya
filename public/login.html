@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+</head>
+<body class="font-sans p-8">
+  <h1 class="text-2xl mb-4">Admin Login</h1>
+  <form id="login-form">
+    <input type="password" placeholder="Password" id="password" required class="block mb-2" />
+    <button type="submit" class="bg-blue-500 text-white px-4 py-2">Login</button>
+  </form>
+
+  <div id="editor" style="display:none;">
+    <h2 class="text-xl mt-6">Post a New Chapter</h2>
+    <form id="post-form">
+      <input type="text" placeholder="Title" id="title" required class="block mb-2" />
+      <textarea placeholder="Story..." id="body" required class="block mb-2"></textarea>
+      <button type="submit" class="bg-green-600 text-white px-4 py-2">Post</button>
+    </form>
+  </div>
+
+  <script>
+    const correctPassword = 'your-secret-password'; // Change this!
+    const loginForm = document.getElementById('login-form');
+    const editor = document.getElementById('editor');
+
+    if (localStorage.getItem('loggedIn') === 'yes') {
+      loginForm.style.display = 'none';
+      editor.style.display = 'block';
+    }
+
+    loginForm.onsubmit = (e) => {
+      e.preventDefault();
+      const pass = document.getElementById('password').value;
+      if (pass === correctPassword) {
+        localStorage.setItem('loggedIn', 'yes');
+        loginForm.style.display = 'none';
+        editor.style.display = 'block';
+      } else {
+        alert('Wrong password!');
+      }
+    };
+
+    document.getElementById('post-form').onsubmit = async (e) => {
+      e.preventDefault();
+      const title = document.getElementById('title').value;
+      const body = document.getElementById('body').value;
+      const res = await fetch('/api/stories', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, body }),
+      });
+      if (res.ok) alert('Posted!');
+    };
+  </script>
+</body>
+</html>

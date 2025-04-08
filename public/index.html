@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Archive</title>
+  <script>
+    async function loadStories() {
+      const res = await fetch('/api/stories');
+      const data = await res.json();
+      const list = document.getElementById('chapter-list');
+      list.innerHTML = data.map(story => `
+        <div class="mb-4 p-4 border rounded shadow">
+          <h2 class="text-xl font-bold">${story.title}</h2>
+          <p class="text-sm text-gray-500">${story.date}</p>
+          <p>${story.body}</p>
+        </div>
+      `).join('');
+    }
+    window.onload = loadStories;
+  </script>
+</head>
+<body class="font-sans p-8">
+  <h1 class="text-3xl mb-4">Welcome to My Archive</h1>
+  <div id="chapter-list">Loading...</div>
+</body>
+</html>
